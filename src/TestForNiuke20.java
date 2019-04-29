@@ -8,7 +8,7 @@
 public class TestForNiuke20 {
 
     public boolean IsPopOrder(int[] pushA, int[] popA) {
-        return false;
+        return true;
     }
 
 }
