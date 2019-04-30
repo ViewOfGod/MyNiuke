@@ -12,7 +12,7 @@ public class TestForNiuke20 {
 
     public static void main(String[] args) {
         int[] in = {1, 2, 3, 4, 5};
-        int[] out = {4, 5, 1, 3, 2};
+        int[] out = {4, 5, 3, 1,2};
         boolean resp = IsPopOrder(in, out);
         System.out.println(resp);
     }
@@ -22,7 +22,11 @@ public class TestForNiuke20 {
             return false;
         if (pushA.length != popA.length)
             return false;
-
+        //校验输出与输入是否为同一组数
+        for (int i = 0; i < popA.length; i++) {
+            if (!have(pushA, popA[i]))
+                return false;
+        }
         //思路：首先，我要获取其出栈顺序，然后判断这个顺序是否符合就OK
         Map<Integer, Integer> mapPush = new HashMap<>();
         for (int i = 1; i <= pushA.length; i++) {//元素数
@@ -32,7 +36,7 @@ public class TestForNiuke20 {
         int[] outxu = new int[popA.length];
         for (int i = 0; i < popA.length; i++) {
             outxu[i] = mapPush.get(popA[i]);
-            System.out.println(outxu[i]);
+            System.out.println(outxu[i]);//打印输出出栈顺序
         }
         System.out.println("--------------------------------------");
         //校验该顺序是否为出栈顺序
@@ -42,14 +46,14 @@ public class TestForNiuke20 {
                 if (outxu[m] < outxu[i])
                     count++;
             }
-            System.out.println(count);
+            System.out.println("当前数值对应的数组大小"+count);
             int[] a = new int[count];
 
-            System.out.println("当前值"+i+"======================================");
+            System.out.println("当前值" + outxu[i] + "======================================");
             int x = 0;
             for (int j = i; j < popA.length; j++) {
                 if (outxu[j] < outxu[i])
-                    a[x++] = j;
+                    a[x++] = outxu[j];
             }
             for (int z = 0; z < count; z++) {
                 System.out.println(a[z]);
@@ -57,12 +61,20 @@ public class TestForNiuke20 {
             System.out.println("===========================================");
             int k = a.length - 1;
             while (k > 0) {
-                if (a[k] < a[k - 1])
+                if (a[k] > a[k - 1])
                     return false;
                 k--;
             }
         }
         return true;
+    }
+
+    static boolean have(int[] push, int pop) {
+        for (int i = 0; i < push.length; i++) {
+            if (pop == push[i])
+                return true;
+        }
+        return false;
     }
 
 }
