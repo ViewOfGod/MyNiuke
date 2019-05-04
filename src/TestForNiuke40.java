@@ -3,6 +3,8 @@ import java.util.ArrayList;
 //有多少种连续的正数序列的和为100(至少包括两个数)
 public class TestForNiuke40 {
     public static ArrayList<ArrayList<Integer>> FindContinuousSequence(int sum) {
+        if(sum==1)
+            return new ArrayList<>();
         int i = 1;
         int num = 0;
         ArrayList<ArrayList<Integer>> lists=new ArrayList<>();
